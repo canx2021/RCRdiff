@@ -1,4 +1,3 @@
-setwd("/Users/Echo_Xu/Dropbox/Courses/Research/Code/RCRdiff_code/cpp_code/")
 library(Rcpp)
 library("matrixStats")
 library("truncnorm")
@@ -61,15 +60,14 @@ get_residual = function(log_dat, RNA_conc, coefs)
 #'@return The function returns a list of elements including: a list of MCMC samples. 
 #'The number of MCMC samples quals iter-warmup. 
 #'@export
-#'@examples
-#'data(FFPE_dat)
-#'result = RCRdiff_BaLASSO(FFPE_dat)
 #'@import truncnorm
 #'@import statmod
 #'@import matrixStats
+#'@import RCRnorm
+#'@import Rcpp
 
 RCRdiff_BaLASSO = function(dat, pos_conc = log10(c(128, 32, 8, 2, 0.5, 0.125)),
-                           iter = 8000, warmup = 6000, random_init = F, 
+                           iter = 8000, warmup = 5000, random_init = F, 
                            seed = 1, mm = 3, m_ab = 9,
                            Z = c(rep(0,14),rep(1,14)))
 {
@@ -161,7 +159,6 @@ RCRdiff_BaLASSO = function(dat, pos_conc = log10(c(128, 32, 8, 2, 0.5, 0.125)),
   invTau2_r = matrix(NA, ncol = n_reg, nrow = iter_keep)
   lambda_tau_r = matrix(NA, ncol = n_reg, nrow = iter_keep)
   lambda_hk = matrix(NA, ncol = n_hk, nrow = iter_keep)
-  #lambda_reg = matrix(NA, ncol = n_reg, nrow = iter_keep)
   d_neg = matrix(NA, ncol = n_neg, nrow = iter_keep)
   d_pos = matrix(NA, ncol = n_pos, nrow = iter_keep)
   d_hk = matrix(NA, ncol = n_hk, nrow = iter_keep)
@@ -177,7 +174,7 @@ RCRdiff_BaLASSO = function(dat, pos_conc = log10(c(128, 32, 8, 2, 0.5, 0.125)),
   sigma2d_neg = numeric(iter_keep)
   sigma2d_phr = numeric(iter_keep)
   
-  
+  #get random initial values; 
   if (random_init == T)
   {
     mu_a_itm = stats::runif(1, 1, 4)
@@ -198,11 +195,10 @@ RCRdiff_BaLASSO = function(dat, pos_conc = log10(c(128, 32, 8, 2, 0.5, 0.125)),
     
     
     lambda_hk_itm = stats::rnorm(n_hk, 0, 1)
-    #lambda_reg_itm = stats::rnorm(n_reg, 0, 1)
-    
+
     alpha_r_itm = stats::rnorm(n_reg, 0, 1)
     beta_r_itm = stats::rnorm(n_reg, 0, 1)
-    invTau2_itm = statmod::rinv.gaussian(n_reg, 1, 1)
+    invTau2_itm = statmod::rinvgauss(n_reg, 1, 1)
     lambda_tau_itm = stats::rgamma(n_reg, 1, 1)
     
     d_neg_itm = stats::rnorm(n_neg, 0, .01)
