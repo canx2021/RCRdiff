@@ -1,7 +1,7 @@
 # RCRdiff
 A fully integrated Bayesian method for differential expression analysis using raw NanoString nCounter data
 ## Description
-Abstract The medium-throughput mRNA abundance platform NanoString nCounter has gained great popularity in 
+The medium-throughput mRNA abundance platform NanoString nCounter has gained great popularity in 
 the past decade, due to its high sensitivity and technical reproducibility as well as remarkable applicability 
 to formalin fixed paraffin embedded (FFPE) tissue samples. 
 Based on RCRnorm developed for normalizing NanoString nCounter data (Jia et al., 2019) 
