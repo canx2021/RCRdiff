@@ -23,7 +23,7 @@ models the behaviors of different types of internal controls along with DE and n
 C. Xu, X. Wang, J. Lim, G. Xiao, Y. Xie, 
 RCRdiff: a fully integrated Bayesian method for differential
 expression analysis using raw NanoString nCounter data, 
-Under review, 2020.
+Under review (2020).
 
 <a id="2">[2]</a> 
 G. Jia, X. Wang, Q. Li, W. Lu, X. Tang, I. Wistuba, Y. Xie, et al., Rcrnorm: An
